@@ -3,7 +3,7 @@
 # Netbeans Project
 <p> </p>
 <div>
-  <img src="pobrane.png">
+  <img src="pobrane-removebg-preview.png">
   </div>
   <p> </p>
 <h1>Overlook:</h1>
