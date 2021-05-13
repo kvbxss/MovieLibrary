@@ -1,11 +1,11 @@
 # MovieLibrary
 
 # Netbeans Project
- <p> </p>
- <div>
- <img src="pobrane.jpg">
-</div>
- <p> </p>
+<p> </p>
+<div>
+  <img src="pobrane.jpg">
+  </div>
+  <p> </p>
 <h1>Overlook:</h1>
 <p> </p>
 <h2>Logowanie:</h2>
