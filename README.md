@@ -19,7 +19,7 @@
 <h1>Procedury w SQL:</h1>
 <div>
   <h1> Dodawanie Filmu </h1>
-```SQL
+```
 USE [MovieLibrary]
 GO
 /****** Object:  StoredProcedure [dbo].[dodajFilm]    Script Date: 13.05.2021 20:40:01 ******/
@@ -38,9 +38,9 @@ BEGIN
 insert into moviess values 
 (@nazwa,@rezyser,@gatunek,@dostepny) 
 end
-```
+```  
 <h1>Edycja Filmu</h1>
-```sql
+```
 USE [MovieLibrary]
 GO
 /****** Object:  StoredProcedure [dbo].[edytujFilm]    Script Date: 13.05.2021 20:40:28 ******/
@@ -62,7 +62,7 @@ where @id = ID;
 end
 ```
 <h1>Procedura Logowania</h1>
-```sql
+```
 USE [MovieLibrary]
 GO
 /****** Object:  StoredProcedure [dbo].[logujMnie]    Script Date: 13.05.2021 20:40:47 ******/
@@ -79,7 +79,7 @@ select * from logowanie where @nazwa = nazwa and @haslo=haslo
 end
 ```
 <h1>Procedura Pobierania Danych</h1>
-```sql
+```
 USE [MovieLibrary]
 GO
 /****** Object:  StoredProcedure [dbo].[pobierzDane]    Script Date: 13.05.2021 20:41:11 ******/
@@ -94,7 +94,7 @@ select * from moviess
 end
 ```
 <h1>Usuwanie Filmu</h1>
-```sql
+```
 USE [MovieLibrary]
 GO
 /****** Object:  StoredProcedure [dbo].[usunFilm]    Script Date: 13.05.2021 20:41:23 ******/
