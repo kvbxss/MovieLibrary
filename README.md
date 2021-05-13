@@ -20,7 +20,7 @@
 <div>
   <h1> Dodawanie Filmu </h1>
   <p> </p>
-```sql
+```js
 USE [MovieLibrary]
 GO
 SET ANSI_NULLS ON
@@ -42,7 +42,7 @@ end
   <p> </p>
 <h1>Edycja Filmu</h1> 
   <p> </p>
-```sql
+```js
 USE [MovieLibrary]
 GO
 SET ANSI_NULLS ON
@@ -65,7 +65,7 @@ end
   <p> </p>
 <h1>Procedura Logowania</h1>
   <p> </p>
-```sql
+```js
 USE [MovieLibrary]
 GO
 SET ANSI_NULLS ON
@@ -83,7 +83,7 @@ end
   <p> </p>
 <h1>Procedura Pobierania Danych</h1>
   <p> </p>
-```
+```js
 USE [MovieLibrary]
 GO
 SET ANSI_NULLS ON
@@ -99,7 +99,7 @@ end
   <p> </p>
 <h1>Usuwanie Filmu</h1>
   <p> </p>
-```sql
+```js
 USE [MovieLibrary]
 GO
 SET ANSI_NULLS ON
