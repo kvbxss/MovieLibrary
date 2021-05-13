@@ -2,7 +2,9 @@
 
 # Netbeans Project
  <p> </p>
-<img src="pobrane.jpg">
+ <div>
+ <img src="pobrane.jpg">
+</div>
  <p> </p>
 <h1>Overlook:</h1>
 <p> </p>
