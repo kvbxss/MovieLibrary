@@ -17,7 +17,7 @@ import MovieLibrary.MovieLibrary;
 
 /**
  *
- * @author kubad
+ * @author batko, hoffman, downarowicz
  */
 public class Login extends javax.swing.JFrame {
 

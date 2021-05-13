@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author batko
+ * @author batko, hoffman, downarowicz
  */
 public class MovieLibrary extends javax.swing.JFrame {
     
