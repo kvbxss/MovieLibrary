@@ -19,10 +19,10 @@
 <h1>Procedury w SQL:</h1>
 <div>
   <h1> Dodawanie Filmu </h1>
-```
+  <p> </p>
+```sql
 USE [MovieLibrary]
 GO
-/****** Object:  StoredProcedure [dbo].[dodajFilm]    Script Date: 13.05.2021 20:40:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -39,11 +39,12 @@ insert into moviess values
 (@nazwa,@rezyser,@gatunek,@dostepny) 
 end
 ```  
-<h1>Edycja Filmu</h1>
-```
+  <p> </p>
+<h1>Edycja Filmu</h1> 
+  <p> </p>
+```sql
 USE [MovieLibrary]
 GO
-/****** Object:  StoredProcedure [dbo].[edytujFilm]    Script Date: 13.05.2021 20:40:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -61,11 +62,12 @@ set nazwa=@nazwa, rezyser=@rezyser, gatunek=@gatunek, dostepny=@dostepny
 where @id = ID;
 end
 ```
+  <p> </p>
 <h1>Procedura Logowania</h1>
-```
+  <p> </p>
+```sql
 USE [MovieLibrary]
 GO
-/****** Object:  StoredProcedure [dbo].[logujMnie]    Script Date: 13.05.2021 20:40:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,11 +80,12 @@ begin
 select * from logowanie where @nazwa = nazwa and @haslo=haslo
 end
 ```
+  <p> </p>
 <h1>Procedura Pobierania Danych</h1>
+  <p> </p>
 ```
 USE [MovieLibrary]
 GO
-/****** Object:  StoredProcedure [dbo].[pobierzDane]    Script Date: 13.05.2021 20:41:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -93,11 +96,12 @@ begin
 select * from moviess
 end
 ```
+  <p> </p>
 <h1>Usuwanie Filmu</h1>
-```
+  <p> </p>
+```sql
 USE [MovieLibrary]
 GO
-/****** Object:  StoredProcedure [dbo].[usunFilm]    Script Date: 13.05.2021 20:41:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -111,4 +115,5 @@ delete from moviess where
 (@id=ID) 
 end
 ```
+  <p> </p>
     </div>
