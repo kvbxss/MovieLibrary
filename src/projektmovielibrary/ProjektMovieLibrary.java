@@ -5,7 +5,7 @@
  */
 package projektmovielibrary;
 
-import MovieLibrary.MovieLibrary;
+import MovieLibrary.Login;
 import java.awt.Color;
 
 /**
@@ -19,14 +19,14 @@ public class ProjektMovieLibrary {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MovieLibrary baza = new MovieLibrary();
+        Login baza = new Login();
         baza.getContentPane().setBackground( Color.WHITE );
         baza.setTitle("MovieLibrary");
-        baza.setSize(830, 840);
+        baza.setSize(930, 350);
         baza.setVisible(true);
         
         
-        baza.aktualizujBaze();
+        
     }
     
 }

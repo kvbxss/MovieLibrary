@@ -40,6 +40,14 @@ public class MovieLibrary extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void resetowanie(){
+        jtxtID.setText("");
+           jtxtID.requestFocus();
+           jtxtNazwa.setText("");
+           jtxtRezyser.setText("");
+           jtxtGatunek.setText("");
+           jtxtDostepny.setText("");
+    }
     public void aktualizujBaze(){
         try
         {
@@ -104,6 +112,7 @@ public class MovieLibrary extends javax.swing.JFrame {
         jbtnDodaj = new javax.swing.JButton();
         jbtnEdytuj = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -123,6 +132,7 @@ public class MovieLibrary extends javax.swing.JFrame {
         jLabel1.setText("ID");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 44, 80, 40));
 
+        jtxtID.setEditable(false);
         jtxtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtIDActionPerformed(evt);
@@ -199,6 +209,17 @@ public class MovieLibrary extends javax.swing.JFrame {
         jButton1.setText("jButton1");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(921, 429, 60, 50));
 
+        jButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("RESET");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 390, 490));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -228,7 +249,7 @@ public class MovieLibrary extends javax.swing.JFrame {
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel6.setBackground(new java.awt.Color(0, 102, 102));
-        jLabel6.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Broadway", 0, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("<html>\nMovie <p>\nLibrary");
@@ -239,14 +260,14 @@ public class MovieLibrary extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -269,26 +290,23 @@ public class MovieLibrary extends javax.swing.JFrame {
         {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); // Zaladowanie sterownika
             polaczenie = DriverManager.getConnection(conn,username,password); //Polaczenie z baza danych przy uzyciu DriverManagera. Zmienne sa zdeklarowane wyzej aby kod wyglądał przejrzyściej.
-            skladnia = polaczenie.prepareStatement("insert into movies(ID,nazwa,rezyser,gatunek,dostepny)values(?,?,?,?,?)");
-        
-            skladnia.setString(1, jtxtID.getText());
-            skladnia.setString(2, jtxtNazwa.getText());
-            skladnia.setString(3, jtxtRezyser.getText());
-            skladnia.setString(4, jtxtGatunek.getText());
-            skladnia.setString(5, jtxtDostepny.getText());
-            
+            skladnia = polaczenie.prepareCall("{call dbo.dodajFilm(?,?,?,?)}");    
+            skladnia.setString(1, jtxtNazwa.getText());
+            skladnia.setString(2, jtxtRezyser.getText());
+            skladnia.setString(3, jtxtGatunek.getText());
+            skladnia.setString(4, jtxtDostepny.getText());     
             skladnia.executeUpdate();
             JOptionPane.showMessageDialog(this, "Dodano Film");
             aktualizujBaze();
+            resetowanie();
         }
      
-        catch(ClassNotFoundException ex){
+        catch(ClassNotFoundException | SQLException ex){
             java.util.logging.Logger.getLogger(java.sql.Connection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             
-        } catch(SQLException ex) {
-                        java.util.logging.Logger.getLogger(java.sql.Connection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
         }
+        // TODO add your handling code here:
+        
      
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnDodajActionPerformed
@@ -302,17 +320,18 @@ public class MovieLibrary extends javax.swing.JFrame {
             id = Integer.parseInt(Tabela.getValueAt(wybranyRzad, 0).toString());
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); // Zaladowanie sterownika
             polaczenie = DriverManager.getConnection(conn,username,password); //Polaczenie z baza danych przy uzyciu DriverManagera. Zmienne sa zdeklarowane wyzej aby kod wyglądał przejrzyściej.
-            skladnia = polaczenie.prepareStatement("update movies set ID =?, nazwa=?, rezyser=?, gatunek=?, dostepny=?");
+            skladnia = polaczenie.prepareCall("{call dbo.edytujFilm(?,?,?,?,?)}");
         
             skladnia.setString(1, jtxtID.getText());
-            skladnia.setString(2, jtxtNazwa.getText());
+            skladnia.setString(2, jtxtNazwa.getText());  
             skladnia.setString(3, jtxtRezyser.getText());
             skladnia.setString(4, jtxtGatunek.getText());
-            skladnia.setString(5, jtxtDostepny.getText());
+            skladnia.setString(5, jtxtDostepny.getText());  
             
             skladnia.executeUpdate();
             JOptionPane.showMessageDialog(this, "Zaktualizowano Film");
             aktualizujBaze();
+            resetowanie();
         }
      
         catch(ClassNotFoundException | SQLException ex){
@@ -352,19 +371,15 @@ public class MovieLibrary extends javax.swing.JFrame {
                   
                        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); // Zaladowanie sterownika
             polaczenie = DriverManager.getConnection(conn,username,password); //Polaczenie z baza danych przy uzyciu DriverManagera. Zmienne sa zdeklarowane wyzej aby kod wyglądał przejrzyściej.
-            skladnia = polaczenie.prepareStatement("delete from movies where id=?");
+            skladnia = polaczenie.prepareCall("{call dbo.usunFilm(?)}");
             
-            skladnia.setInt(1,id);
+            skladnia.setString(1, jtxtID.getText());
             skladnia.executeUpdate();
            JOptionPane.showMessageDialog(this, "Film poprawnie usunięty");
            aktualizujBaze();
-           
-           jtxtID.setText("");
+           resetowanie();
            jtxtID.requestFocus();
-           jtxtNazwa.setText("");
-           jtxtRezyser.setText("");
-           jtxtGatunek.setText("");
-           jtxtDostepny.setText("");
+           
               }
           }
           
@@ -374,6 +389,16 @@ public class MovieLibrary extends javax.swing.JFrame {
         
           }        
     }//GEN-LAST:event_jbtnUsunActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+           jtxtID.setText("");
+           jtxtID.requestFocus();
+           jtxtNazwa.setText("");
+           jtxtRezyser.setText("");
+           jtxtGatunek.setText("");
+           jtxtDostepny.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -412,6 +437,7 @@ public class MovieLibrary extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
