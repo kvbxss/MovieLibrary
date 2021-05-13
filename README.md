@@ -19,7 +19,7 @@
 <h1>Procedury w SQL:</h1>
 <div>
   <h1> Dodawanie Filmu </h1>
-```sql
+```SQL
 USE [MovieLibrary]
 GO
 /****** Object:  StoredProcedure [dbo].[dodajFilm]    Script Date: 13.05.2021 20:40:01 ******/
